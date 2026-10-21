@@ -1,8 +1,24 @@
-.terraform/
+
+# Python virtual environment
+app/.venv/
+
+# Local database and test data
+app/*.db
+app/*.sqlite
+app/*.sqlite3
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Terraform local files
+**/.terraform/*
 *.tfstate
 *.tfstate.*
 *.tfplan
 crash.log
-*.pem
-*.key
-.env
