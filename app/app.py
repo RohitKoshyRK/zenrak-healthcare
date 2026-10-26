@@ -4,7 +4,7 @@ import sqlite3
 app = Flask(__name__)
 
 def get_db_connection():
-    connection = sqlite3.connect("patients.db")
+    connection = sqlite3.connect("/data/patients.db")
     connection.row_factory = sqlite3.Row
     return connection
 
@@ -39,10 +39,15 @@ def add_patient():
     if not name or not age or not age.isdigit():
         return "Invalid patient details", 400
 
+    age = int(age)
+
+    if age < 0 or age > 130:
+        return "Age must be between 0 and 130", 400
+
     connection = get_db_connection()
     connection.execute(
         "INSERT INTO patients (name, age) VALUES (?,?)",
-        (name, int(age))
+        (name, age)
     )
     connection.commit()
     connection.close()
@@ -70,4 +75,5 @@ def patient_details(patient_id):
 
 if __name__ == "__main__":
     create_table()
+    app.run(host="0.0.0.0", port=5000, debug=False)
     app.run(debug = True)

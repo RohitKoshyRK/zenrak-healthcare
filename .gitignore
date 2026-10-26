@@ -6,6 +6,7 @@ app/.venv/
 app/*.db
 app/*.sqlite
 app/*.sqlite3
+app/.venv/
 
 # Python cache
 __pycache__/
